@@ -1,5 +1,5 @@
 # create-milestone-action
-The Github Action to create Milestone
+Creating a milestone or returning an existing one. Pure JS action.
 
 ## Inputs
 

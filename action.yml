@@ -1,5 +1,8 @@
-name: "Create Milestone"
-description: "Creating a Milestone in the Repository"
+name: "Create Milestone JS"
+description: "Creating a milestone or returning an existing one. Pure JS action."
+branding:
+  icon: "check-circle"
+  color: "green"
 inputs:
   token:
     description: "Github Token."
