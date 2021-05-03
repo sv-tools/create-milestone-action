@@ -1,0 +1,33 @@
+{
+  "name": "create-milestone-action",
+  "version": "1.0.0",
+  "description": "Guthub Action to create a Milestone",
+  "keywords": [
+    "GitHub",
+    "Action",
+    "Milestone"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install && npm i -g @vercel/ncc && ncc build index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sv-tools/create-milestone-action.git"
+  },
+  "author": {
+    "name": "Sergey Vilgelm",
+    "email": "sergey@vilgelm.com",
+    "url": "https://vilgelm.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sv-tools/create-milestone-action/issues"
+  },
+  "homepage": "https://github.com/sv-tools/create-milestone-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.7",
+    "@actions/github": "^4.0.0"
+  }
+}
