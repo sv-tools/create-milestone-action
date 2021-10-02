@@ -38,7 +38,7 @@ The Number of the created milestone.
 
 The State of the created milestone.
 
-## Example usage
+## Example
 
 ```yaml
 uses: sv-tools/create-milestone-action@v1
