@@ -31,7 +31,7 @@ async function run() {
     }
 
     const ctx = context;
-    const milestones = await octokit.issues.listMilestones({
+    const milestones = await octokit.rest.issues.listMilestones({
         owner: ctx.repo.owner,
         repo: ctx.repo.repo,
         state: "all"
@@ -45,7 +45,7 @@ async function run() {
 
     params['owner'] = ctx.repo.owner;
     params['repo'] = ctx.repo.repo;
-    const newMilestone = await octokit.issues.createMilestone(params);
+    const newMilestone = await octokit.rest.issues.createMilestone(params);
 
     setMilestoneOutput(newMilestone.data)
 }
