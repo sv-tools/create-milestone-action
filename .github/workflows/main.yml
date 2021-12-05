@@ -3,6 +3,10 @@ name: "Test Action"
 on:
   pull_request:
 
+concurrency:
+  group: ${{ format('{0}-{1}', github.workflow, github.head_ref) }}
+  cancel-in-progress: true
+
 jobs:
   create_milestone:
     runs-on: ubuntu-latest
