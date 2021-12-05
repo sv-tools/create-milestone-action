@@ -13,7 +13,7 @@ async function run() {
 
     const state = getInput('state');
     if (!states.includes(state)) {
-        throw new Error(`invalid value of "stat": "${state}", expected "open" or "closed"`);
+        throw new Error(`invalid value of "state": "${state}", expected "open" or "closed"`);
     }
     params['state'] = state;
 
@@ -24,7 +24,7 @@ async function run() {
 
     const due_on = getInput('due_on');
     if (due_on) {
-        if (isNaN(new Date(due_on))) {
+        if (isNaN(new Date(due_on).getTime())) {
             throw new Error(`invalid value of "due_on": "${due_on}", expected ISO 8601 format`)
         }
         params['due_on'] = due_on
