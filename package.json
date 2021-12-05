@@ -1,7 +1,7 @@
 {
   "name": "create-milestone-action",
   "version": "1.0.0",
-  "description": "Guthub Action to create a Milestone",
+  "description": "Pure JS GitHub Action to create a Milestone",
   "keywords": [
     "GitHub",
     "Action",
@@ -9,17 +9,13 @@
   ],
   "main": "index.js",
   "scripts": {
-    "build": "npm install && npm i -g @vercel/ncc && ncc build index.js"
+    "build": "ncc build index.js --license licenses.txt"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sv-tools/create-milestone-action.git"
   },
-  "author": {
-    "name": "Sergey Vilgelm",
-    "email": "sergey@vilgelm.com",
-    "url": "https://vilgelm.com"
-  },
+  "author": "Sergey Vilgelm <sergey@vilgelm.com> (https://vilgelm.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sv-tools/create-milestone-action/issues"
@@ -28,5 +24,8 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.33.0"
   }
 }
