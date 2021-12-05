@@ -5,7 +5,7 @@ Creating a milestone or returning an existing one. Pure JS action.
 
 ### `token`
 
-**Required** Github Token.
+**Required** GitHub Token.
 
 ### `title`
 
