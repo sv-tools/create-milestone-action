@@ -1,0 +1,70 @@
+name: "Code Analysis"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * 0"
+
+concurrency:
+  group: ${{ format('{0}-{1}', github.workflow, github.head_ref) }}
+  cancel-in-progress: true
+
+jobs:
+  CodeQL:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: javascript
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+  Check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install
+      - name: Check Formatting
+        run: npm run check
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Create
+        id: create
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: ${{ github.run_number }}
+      - run: echo "The Number - ${{ steps.create.outputs.number }}"
+      - run: echo "The ID - ${{ steps.create.outputs.id }}"
+      - run: echo "The State - ${{ steps.create.outputs.state }}"
+      - name: Second run
+        id: close
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: ${{ github.run_number }}
+          state: "closed"
+      - run: echo "The Number - ${{ steps.close.outputs.number }}"
+      - run: echo "The ID - ${{ steps.close.outputs.id }}"
+      - run: echo "The State - ${{ steps.close.outputs.state }} - should be open"
+      - name: Delete Milestone
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/${{ github.repository }}/milestones/{milestone_number}
+          milestone_number: ${{ steps.create.outputs.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -9,7 +9,10 @@
   ],
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js --license licenses.txt"
+    "all": "npm run fmt && npm run build",
+    "build": "ncc build index.js --license licenses.txt",
+    "fmt": "prettier --write index.js package.json action.yml .github/dependabot.yml .github/workflows/*.yml",
+    "check": "prettier --check index.js package.json action.yml .github/dependabot.yml .github/workflows/*.yml"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,7 @@
     "@actions/github": "^5.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.0"
+    "@vercel/ncc": "^0.33.0",
+    "prettier": "^2.5.1"
   }
 }
