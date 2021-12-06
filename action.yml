@@ -5,28 +5,28 @@ branding:
   color: "green"
 inputs:
   token:
-    description: "Github Token."
+    description: "GitHub Token."
     required: true
   title:
-    description: "The title of the milestone."
+    description: "The title of a milestone."
     required: true
   state:
-    description: "The state of the milestone. Either `open` or `closed`."
+    description: "The state of a milestone. Either `open` or `closed`. Default: `open`"
     required: false
     default: "open"
   description:
-    description: "A description of the milestone."
+    description: "The description of a milestone."
     required: false
   due_on:
-    description: "The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`."
+    description: "The due date of a milestone. Timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`."
     required: false
 outputs:
   id:
-    description: "The ID of the created milestone."
+    description: "An ID of the created milestone."
   number:
-    description: "The Number of the created milestone."
+    description: "A Number of the created milestone."
   state:
-    description: "The State of the created milestone."
+    description: "A State of the created milestone."
 runs:
   using: "node12"
   main: "dist/index.js"

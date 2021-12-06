@@ -9,34 +9,34 @@ Creating a milestone or returning an existing one. Pure JS action.
 
 ### `title`
 
-**Required** The title of the milestone.
+**Required** The title of a milestone.
 
 ### `state`
 
-The state of the milestone. Either `open` or `closed`. Default `open`.
+The state of a milestone. Either `open` or `closed`. Default `open`.
 
 ### `description`
 
-A description of the milestone.
+The description of a milestone.
 
 ### `due_on`
 
-The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+The due date of a milestone. Timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 
 ## Outputs
 
 ### `id`
 
-The ID of the created milestone.
+An ID of the created milestone.
 
 ### `number`
 
-The Number of the created milestone.
+A Number of the created milestone.
 
 ### `state`
 
-The State of the created milestone.
+A State of the created milestone.
 
 ## Example
 
