@@ -16,5 +16,7 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: Next
-      - run: echo "The number ${{ steps.create.outputs.number }}"
+          title: ${{ github.run_number }}
+      - run: echo "The Number - ${{ steps.create.outputs.number }}"
+      - run: echo "The ID - ${{ steps.create.outputs.id }}"
+      - run: echo "The State - ${{ steps.create.outputs.state }}"
