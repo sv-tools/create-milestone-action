@@ -14,68 +14,76 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 
-const states = ['open', 'closed'];
-
+const states = ["open", "closed"];
 
 async function run() {
-    const octokit = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)((0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('token', { required: true }));
-    const params = {};
+  const octokit = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)((0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("token", { required: true }));
+  const params = {};
 
-    const title = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('title', { required: true });
-    params['title'] = title;
+  const title = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("title", { required: true });
+  params["title"] = title;
 
-    const state = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('state');
-    if (!states.includes(state)) {
-        throw new Error(`invalid value of "state": "${state}", expected "open" or "closed"`);
+  const state = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("state");
+  if (!states.includes(state)) {
+    throw new Error(
+      `invalid value of "state": "${state}", expected "open" or "closed"`
+    );
+  }
+  params["state"] = state;
+
+  const description = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("description");
+  if (description) {
+    params["description"] = description;
+  }
+
+  const due_on = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("due_on");
+  if (due_on) {
+    if (isNaN(new Date(due_on).getTime())) {
+      throw new Error(
+        `invalid value of "due_on": "${due_on}", expected ISO 8601 format`
+      );
     }
-    params['state'] = state;
+    params["due_on"] = due_on;
+  }
 
-    const description = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('description');
-    if (description) {
-        params['description'] = description;
-    }
+  const ctx = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
+  const milestones = await octokit.rest.issues.listMilestones({
+    owner: ctx.repo.owner,
+    repo: ctx.repo.repo,
+    state: "all",
+  });
+  const oldMilestone = milestones.data.find(
+    (milestone) => milestone.title === title
+  );
 
-    const due_on = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('due_on');
-    if (due_on) {
-        if (isNaN(new Date(due_on).getTime())) {
-            throw new Error(`invalid value of "due_on": "${due_on}", expected ISO 8601 format`)
-        }
-        params['due_on'] = due_on
-    }
+  if (oldMilestone) {
+    setMilestoneOutput(oldMilestone);
+    return;
+  }
 
-    const ctx = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
-    const milestones = await octokit.rest.issues.listMilestones({
-        owner: ctx.repo.owner,
-        repo: ctx.repo.repo,
-        state: "all"
-    });
-    const oldMilestone = milestones.data.find(milestone => milestone.title === title);
+  params["owner"] = ctx.repo.owner;
+  params["repo"] = ctx.repo.repo;
+  const newMilestone = await octokit.rest.issues.createMilestone(params);
 
-    if (oldMilestone) {
-        setMilestoneOutput(oldMilestone)
-        return
-    }
-
-    params['owner'] = ctx.repo.owner;
-    params['repo'] = ctx.repo.repo;
-    const newMilestone = await octokit.rest.issues.createMilestone(params);
-
-    setMilestoneOutput(newMilestone.data)
+  setMilestoneOutput(newMilestone.data);
 }
 
 function setMilestoneOutput(milestone) {
-    if (milestone.state === "closed") {
-        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.warning)(`The milestone "${milestone.title}" is closed.`)
-    }
-    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('id', milestone.id);
-    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('number', milestone.number);
-    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('state', milestone.state);
+  if (milestone.state === "closed") {
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.warning)(`The milestone "${milestone.title}" is closed.`);
+  }
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("id", milestone.id);
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("number", milestone.number);
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("state", milestone.state);
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("description", milestone.description);
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("title", milestone.title);
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)("due_on", milestone.due_on);
 }
 
 try {
-    await run();
+  await run();
 } catch (error) {
-    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
+  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
 }
 
 __webpack_handle_async_dependencies__();

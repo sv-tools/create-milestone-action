@@ -27,6 +27,12 @@ outputs:
     description: "A Number of the created milestone."
   state:
     description: "A State of the created milestone."
+  title:
+    description: "A Title of the changed milestone."
+  description:
+    description: "A Description of the changed milestone."
+  due_on:
+    description: "The due date of the changed milestone."
 runs:
   using: "node16"
   main: "dist/index.js"

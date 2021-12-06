@@ -28,15 +28,27 @@ The due date of a milestone. Timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ
 
 ### `id`
 
-An ID of the created milestone.
+An ID of the changed milestone.
 
 ### `number`
 
-A Number of the created milestone.
+A Number of the changed milestone.
 
 ### `state`
 
-A State of the created milestone.
+A State of the changed milestone.
+
+### `title`
+
+A Title of the changed milestone.
+
+### `description`
+
+A Description of the changed milestone.
+
+### `due_on`
+
+The due date of the changed milestone.
 
 ## Example
 
