@@ -28,5 +28,5 @@ outputs:
   state:
     description: "A State of the created milestone."
 runs:
-  using: "node12"
+  using: "node16"
   main: "dist/index.js"
