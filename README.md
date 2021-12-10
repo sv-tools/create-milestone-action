@@ -1,6 +1,8 @@
 # create-milestone-action
 Create a new milestone or return an existing one. Pure JS action.
 
+The action is written in JavaScript for speed of execution.
+
 ## Inputs
 
 ### `token`
