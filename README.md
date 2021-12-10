@@ -1,5 +1,5 @@
 # create-milestone-action
-Creating a milestone or returning an existing one. Pure JS action.
+Create a new milestone or return an existing one. Pure JS action.
 
 ## Inputs
 
