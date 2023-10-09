@@ -13,7 +13,7 @@ async function run() {
   const state = getInput("state");
   if (!states.includes(state)) {
     throw new Error(
-      `invalid value of "state": "${state}", expected "open" or "closed"`
+      `invalid value of "state": "${state}", expected "open" or "closed"`,
     );
   }
   params["state"] = state;
@@ -27,7 +27,7 @@ async function run() {
   if (due_on) {
     if (isNaN(new Date(due_on).getTime())) {
       throw new Error(
-        `invalid value of "due_on": "${due_on}", expected ISO 8601 format`
+        `invalid value of "due_on": "${due_on}", expected ISO 8601 format`,
       );
     }
     params["due_on"] = due_on;
@@ -40,7 +40,7 @@ async function run() {
     state: "all",
   });
   const oldMilestone = milestones.data.find(
-    (milestone) => milestone.title === title
+    (milestone) => milestone.title === title,
   );
 
   if (oldMilestone) {
