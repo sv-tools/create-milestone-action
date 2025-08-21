@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  UpdateMocks:
+  UpdateDist:
     runs-on: ubuntu-latest
     permissions:
       contents: write
