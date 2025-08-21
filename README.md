@@ -1,4 +1,5 @@
 # create-milestone-action
+
 Create a new milestone or return an existing one. Pure JS action.
 
 The action is written in JavaScript for speed of execution.
@@ -24,7 +25,6 @@ The description of a milestone.
 ### `due_on`
 
 The due date of a milestone. Timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-
 
 ## Outputs
 
@@ -55,7 +55,7 @@ The due date of the changed milestone.
 ## Example
 
 ```yaml
-uses: sv-tools/create-milestone-action@v1
+uses: sv-tools/create-milestone-action@v2
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   title: Next
